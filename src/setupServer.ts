@@ -1,4 +1,3 @@
-import { CustomError, IErrorResponse } from './shared/globals/helper/error-handler';
 import { Application, json, urlencoded, Response, Request, NextFunction } from 'express';
 import { Server as HttpServer } from 'http';
 import { Server as SocketIOServer } from 'socket.io';
@@ -11,8 +10,9 @@ import hpp from 'hpp';
 import cookieSession from 'cookie-session';
 import HTTP_STATUS from 'http-status-codes';
 import 'express-async-errors';
-import { config } from './config';
-import appRoutes from './routes';
+import { CustomError, IErrorResponse } from '@globals/helper/error-handler';
+import { config } from '@root/config';
+import appRoutes from '@root/routes';
 
 const SERVER_PORT = 5001;
 const log = config.createLogger('setupServer');
@@ -105,7 +105,9 @@ export class Server {
     return io;
   }
 
-  private socketIOConnections(io: SocketIOServer): void {}
+  private socketIOConnections(io: SocketIOServer): void {
+    log.info('');
+  }
 
   private startHttpServer(httpServer: HttpServer): void {
     log.info(`Server has started with process ${process.pid}`);
